@@ -1,7 +1,7 @@
 <template>
 	<span>
 		<span v-if="field.isMultiple">
-			<span v-if="resourceLabels.length > 0 ">{{resourceLabels.join(', ')}}</span>
+			<span v-if="resourceLabels.length > 0 ">{{resourceLabels.join(', ')}}Joe </span>
 			<span v-else>&mdash;</span>
 		</span>
 		<span v-else>{{ field.value }}</span>

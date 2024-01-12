@@ -1,14 +1,15 @@
 <template>
 	<div>
-		<panel-item :field="field">
-			<template slot="value">
-				<div v-if="fieldValue" class="text-90">
-					<div v-if="field.isMultiple">{{resourceLabels.join(', ')}}</div>
-					<div v-else>{{ fieldValue }}</div>
+		<div v-if="fieldValue" class="text-90">
+			<div v-if="field.isMultiple" class="searchable-select-multiple">
+				<div v-for="resource of resources">
+					{{resource.display}}
+					<img class="searchable-select-img" :src="resource.image_url">
 				</div>
-				<div v-else>&mdash;</div>
-			</template>
-		</panel-item>
+			</div>
+			<div v-else>{{ fieldValue }}</div>
+		</div>
+		<div v-else>&mdash;</div>
 	</div>
 </template>
 
@@ -33,10 +34,10 @@ export default {
 		},
 		fieldValue() {
 			if (
-				this.field.value === '' ||
-				this.field.value === null ||
-				this.field.value === undefined ||
-				this.field.value === '[]'
+					this.field.value === '' ||
+					this.field.value === null ||
+					this.field.value === undefined ||
+					this.field.value === '[]'
 			) {
 				return false
 			}
@@ -47,23 +48,23 @@ export default {
 	methods: {
 		getAvailableResources() {
 			return Nova.request()
-				.get(
-					`/nova-vendor/searchable-select/${this.field.searchableResource}`,
-					{
-						params: {
-							label: this.field.label,
-                            labelPrefix: this.field.labelPrefix,
-							value: this.field.valueField,
-                            searchable: this.field.searchable == true ? 1 : 0,
-							use_resource_ids: this.field.isMultiple,
-							resource_ids: this.field.value
-						}
-					}
-				)
-				.then(response => {
-					// Turn off initializing the existing resource after the first time
-					this.resources = response.data.resources
-				})
+					.get(
+							`/nova-vendor/searchable-select/${this.field.searchableResource}`,
+							{
+								params: {
+									label: this.field.label,
+									labelPrefix: this.field.labelPrefix,
+									value: this.field.valueField,
+									searchable: this.field.searchable == true ? 1 : 0,
+									use_resource_ids: this.field.isMultiple,
+									resource_ids: this.field.value
+								}
+							}
+					)
+					.then(response => {
+						// Turn off initializing the existing resource after the first time
+						this.resources = response.data.resources
+					})
 		}
 	}
 }

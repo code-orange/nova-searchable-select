@@ -1,0 +1,21 @@
+.searchable-select__selected-resources > div {
+	border: 1px solid black;
+}
+
+.searchable-select-multiple {
+	display: flex;
+	grid-gap: 8px;
+}
+
+.searchable-select-img {
+	max-width: 100px;
+}
+
+.search-input-options .selected {
+	background: gray;
+	color: white;
+}
+
+.form-input .search-input-input {
+	border: 1px solid grey;
+}

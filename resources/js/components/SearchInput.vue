@@ -3,7 +3,7 @@
 		:data-testid="dataTestid"
 		:dusk="dataTestid"
 		:class="{ 'opacity-75': disabled }"
-		v-on-clickaway="close"
+		v-click-away="close"
 	>
 		<div class="relative">
 			<div
@@ -54,7 +54,7 @@
 		<div
 			v-if="show"
 			ref="dropdown"
-			class="form-input px-0 border border-60 absolute pin-t pin-l my-1 overflow-hidden"
+			class="form-input px-0 border border-60 absolute my-1 overflow-hidden"
 			:style="{ width: inputWidth + 'px', zIndex: 2000 }"
 		>
 			<div class="p-2 bg-grey-300">
@@ -69,7 +69,7 @@
 					class="outline-none search-input-input w-full px-2 py-1.5 text-sm leading-normal bg-white rounded"
 					tabindex="-1"
 					type="text"
-					:placeholder="__('Search')"
+					:placeholder="__('Type to search: (By id, name, brand etc.)')"
 					spellcheck="false"
 				/>
 			</div>
@@ -92,10 +92,10 @@
 					:class="{
                         [`search-input-item-${index}`]: true,
                         'hover:bg-30': index !== selected,
-                        'bg-primary text-white': index === selected,
+                        'selected': index === selected,
                     }"
 				>
-					<slot name="option" :option="option" :selected="index === selected"></slot>
+					<slot v-bind:option="option" name="option" :option="option" :selected="index === selected"></slot>
 				</div>
 			</div>
 		</div>
@@ -105,10 +105,10 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import Popper from 'popper.js'
-import { mixin as clickaway } from 'vue-clickaway'
+import {mixin} from "vue3-click-away";
 
 export default {
-	mixins: [clickaway],
+	mixins: [mixin],
 	inheritAttrs: false,
 	props: {
 		dataTestid: {},
