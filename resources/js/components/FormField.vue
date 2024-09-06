@@ -78,12 +78,11 @@
 
 <script>
 import _ from 'lodash';
-import {HandlesValidationErrors} from 'laravel-nova';
 import PerformsSearches from '../mixins/PerformsSearches';
 import draggable from 'vuedraggable';
 
 export default {
-	mixins: [PerformsSearches, HandlesValidationErrors],
+	mixins: [PerformsSearches],
 
 	props: {
 		resourceName: String,
